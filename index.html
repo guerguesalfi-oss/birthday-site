@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080d20">
+<title>A Little Wish ✦</title>
+<style>
+:root{--night:#080d20;--panel:#111b35;--gold:#f1dba5;--text:#f6f4fb;--muted:#c0c8dc;--line:#ffffff24}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at 50% 0%,#26385e 0%,transparent 48%),linear-gradient(#0d1730,var(--night) 80%);color:var(--text);font-family:Georgia,"Times New Roman",serif;min-height:100vh}
+.stars{position:fixed;inset:0;pointer-events:none;opacity:.65;background-image:radial-gradient(2px 2px at 15% 18%,#fff 90%,transparent),radial-gradient(1px 1px at 72% 13%,#fff 90%,transparent),radial-gradient(2px 2px at 88% 48%,#f1dba5 90%,transparent),radial-gradient(1px 1px at 32% 72%,#fff 90%,transparent),radial-gradient(2px 2px at 55% 42%,#fff 90%,transparent),radial-gradient(1px 1px at 20% 88%,#fff 90%,transparent);background-size:320px 300px;animation:twinkle 5s ease-in-out infinite alternate}
+@keyframes twinkle{from{opacity:.3}to{opacity:.8}}
+main{position:relative;z-index:1;width:min(100% - 32px,760px);margin:auto;padding:56px 0 72px}
+section{margin:0 auto 26px;padding:clamp(24px,5vw,42px);border:1px solid var(--line);border-radius:24px;background:#0b1428d9;box-shadow:0 18px 60px #0002;backdrop-filter:blur(8px)}
+.center{text-align:center}.eyebrow{font:11px Arial,sans-serif;letter-spacing:4px;text-transform:uppercase;color:var(--gold)}
+.moon{width:64px;height:64px;border-radius:50%;background:var(--gold);margin:0 auto 28px;position:relative;box-shadow:0 0 45px #f1dba52a;animation:float 4s ease-in-out infinite}
+.moon:after{content:"";position:absolute;width:59px;height:59px;left:18px;top:-7px;border-radius:50%;background:#172441}
+@keyframes float{50%{transform:translateY(-7px)}}
+h1{font-size:clamp(42px,9vw,68px);line-height:1.06;letter-spacing:-2px;font-weight:normal;margin:18px 0}
+h2{font-size:clamp(27px,5vw,38px);font-weight:normal;margin:12px 0 20px}
+p{font-size:16px;line-height:1.9;color:var(--muted)}.intro-line{font-size:19px;color:#fff}.gold{color:var(--gold)!important;font-style:italic}
+button,.button{font:14px Arial,sans-serif;letter-spacing:.2px;display:inline-block;border:1px solid var(--gold);border-radius:28px;padding:14px 21px;background:var(--gold);color:#10172c;cursor:pointer;text-decoration:none;transition:.2s}
+button:hover,.button:hover{transform:translateY(-2px);box-shadow:0 0 25px #f1dba522}
+button.secondary{background:transparent;color:var(--gold)}button:disabled{opacity:.55;cursor:wait;transform:none}
+.hidden{display:none!important}.small{font:12px Arial,sans-serif;color:#99a6c4;letter-spacing:1px}
+.letter{background:linear-gradient(145deg,#101a34,#0b1327)}
+.letter p{margin:0 0 15px}.letter p:last-child{margin-bottom:0}
+.interest-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:24px}
+.interest{border:1px solid var(--line);border-radius:18px;padding:20px;background:#ffffff06;min-height:145px}
+.interest .symbol{font-size:27px;color:var(--gold)}.interest h3{font-size:19px;font-weight:normal;margin:10px 0 5px}.interest p{font-size:14px;margin:0;line-height:1.65}
+label{display:block;font:13px Arial,sans-serif;color:var(--gold);margin:20px 0 9px}
+textarea{width:100%;min-height:125px;resize:vertical;background:#080f20;color:#fff;border:1px solid #ffffff35;border-radius:14px;padding:14px;font:15px/1.7 Arial,sans-serif}
+textarea:focus{outline:2px solid #f1dba580;border-color:var(--gold)}textarea::placeholder{color:#8996b5}
+.form-note{font:12px/1.7 Arial,sans-serif;color:#9ba8c5}
+.status{margin-top:15px;font:14px/1.7 Arial,sans-serif;color:var(--gold)}
+footer{text-align:center;color:#8794b3;font:11px Arial,sans-serif;letter-spacing:1.5px;padding:10px}
+@media(max-width:520px){main{padding-top:28px}.interest-grid{grid-template-columns:1fr}section{border-radius:19px}.moon{width:55px;height:55px}.moon:after{width:51px;height:51px;left:15px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="stars" aria-hidden="true"></div>
+<main>
+  <section class="center" id="intro">
+    <div class="moon" aria-hidden="true"></div>
+    <div class="eyebrow">A LITTLE SOMETHING FOR YOU</div>
+    <h1>Welcome to<br>my little chaos <span class="gold">✦</span></h1>
+    <p class="intro-line">Okay, so… Gerges here. Unfortunately. 🤡</p>
+    <p>No sé si esto es una buena idea, pero ya estoy aquí, así que… ¡bienvenida a mi pequeño caos! 😂✨</p>
+    <p class="gold">Please lower your expectations. I made this myself. 💀</p>
+    <button id="startBtn">Okay, let's see this... →</button>
+  </section>
+
+  <section class="letter hidden" id="letter">
+    <div class="eyebrow">A LETTER, JUST BECAUSE</div>
+    <h2>Un pequeño mensaje 💌</h2>
+    <p>Buenas tardes ☀️😂</p>
+    <p>Sé que he hecho un montón de cosas raras, pero bueno, ya estás acostumbrada a mí, jajaja. 😂 Esta es la última cosa rara que voy a hacer… y quizá sea una sorpresa para ti.</p>
+    <p>Espero que te haya gustado aunque sea un poquito el video de ayer. ❤️</p>
+    <p>Quería desearte un feliz cumpleaños, pero de una manera un poquito más especial y diferente. De verdad, espero que siempre seas feliz y que tengas muchos motivos para sonreír.</p>
+    <p>No importa lo que haya pasado antes. Intento evitar cualquier cosa que pueda molestarte. Pero hoy, en esta pequeña celebración de tu cumpleaños, aunque sea un poquito tarde, quiero darte las gracias. Gracias de verdad por tantas cosas.</p>
+    <p>Quizá no te imaginas cómo me siento cuando hablo contigo, pero de verdad, hablar contigo puede cambiar por completo mi día. Y espero de corazón que recibas todo esto con mucho cariño. 🫶</p>
+    <p>Hice todo esto para ti simplemente porque eres alguien muy especial para mí. Es la primera vez que hago algo así, y de verdad espero que te guste. Intenté incluir, tanto como pude, las cosas que te gustan.</p>
+    <p>Te deseo un año precioso, lleno de oportunidades para cumplir tus sueños y hacer todo lo que te gusta. Espero que este nuevo año de tu vida te traiga muchísimas cosas bonitas.</p>
+    <p class="gold">Con mucho cariño, 🫶<br>Gerges ♡</p>
+    <div class="center" style="margin-top:28px"><button id="toInterests" class="secondary">There's a little more... →</button></div>
+  </section>
+
+  <section class="hidden" id="interests">
+    <div class="eyebrow">A FEW LITTLE DETAILS</div>
+    <h2>Little things you love ✨</h2>
+    <p>Quería añadir pequeños detalles que me recuerdan a las cosas que te gustan. Espero haber acertado. 🌙</p>
+    <div class="interest-grid">
+      <div class="interest"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/170517_Jennie_Kim_Blackpink_01.jpg?width=700" alt="Jennie" style="width:100%;height:180px;object-fit:cover;border-radius:12px;margin-bottom:12px"><h3>Jennie</h3><p>A little nod to your music taste. 🎧</p></div>
+<div class="interest"><img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=900&q=85" alt="Flowers" style="width:100%;height:180px;object-fit:cover;border-radius:12px;margin-bottom:12px"><h3>Flowers</h3><p>Un pequeño detalle floral, solo para darle un poquito de magia. 🌷</p></div>
+<div class="interest"><img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=900&q=85" alt="Drawing" style="width:100%;height:180px;object-fit:cover;border-radius:12px;margin-bottom:12px"><h3>Drawing</h3><p>Para todas las ideas bonitas que todavía esperan convertirse en dibujos. 🎨</p></div>
+<div class="interest"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/The_Kiss_by_Gustav_Klimt.jpg?width=700" alt="The Kiss by Gustav Klimt" style="width:100%;height:180px;object-fit:cover;border-radius:12px;margin-bottom:12px"><h3>A little art</h3><p>Un guiño a <em>The Kiss</em> y a la belleza de encontrar algo especial en una obra de arte.</p></div>
+    </div>
+    <div class="center" style="margin-top:30px"><button id="toReply">Your turn now →</button></div>
+  </section>
+
+  <section class="hidden" id="reply">
+    <div class="eyebrow">YOUR LITTLE CORNER</div>
+    <h2>Now, it's your turn 💫</h2>
+    <p>Si te apetece, puedes dejarme una pequeña respuesta aquí. No tienes que escribir nada si no quieres. ♡</p>
+    <form id="replyForm">
+      <label for="wish">Make a wish 🌠</label>
+      <textarea id="wish" maxlength="2000" placeholder="Write your wish here..."></textarea>
+      <label for="message">Something to tell me 💌</label>
+      <textarea id="message" maxlength="4000" placeholder="Is there something you'd like to tell me?"></textarea>
+      <p class="form-note">You can leave either box empty. Please don't include passwords, addresses, or other sensitive personal information.</p>
+      <button id="sendBtn" type="submit">Send to Gerges →</button>
+      <div class="status" id="status" role="status" aria-live="polite"></div>
+    </form>
+  </section>
+  <footer>MADE OF WORDS & A LITTLE STARDUST ✦</footer>
+</main>
+<script>
+/*
+  SETUP REQUIRED BEFORE PUBLISHING:
+  1. Create a Supabase project.
+  2. Run setup.sql from the included ZIP in Supabase SQL Editor.
+  3. Replace SUPABASE_URL and SUPABASE_ANON_KEY below with your project's values.
+  Without those values, the form will show a setup message and will not pretend to send.
+*/
+const SUPABASE_URL = "https://licxxmpkkpdsyuzooupo.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_6wNKlDDhYMTLnis5wTpxVw_CaYxKwZZ";
+
+const show = id => document.getElementById(id).classList.remove("hidden");
+function goTo(id) {
+  show(id);
+  document.getElementById(id).scrollIntoView({behavior:"smooth",block:"start"});
+}
+document.getElementById("startBtn").addEventListener("click",()=>goTo("letter"));
+document.getElementById("toInterests").addEventListener("click",()=>goTo("interests"));
+document.getElementById("toReply").addEventListener("click",()=>goTo("reply"));
+
+document.getElementById("replyForm").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const status = document.getElementById("status");
+  const sendBtn = document.getElementById("sendBtn");
+  const wish = document.getElementById("wish").value.trim();
+  const message = document.getElementById("message").value.trim();
+  if (!wish && !message) {
+    status.textContent = "Write something in at least one box first. ♡";
+    return;
+  }
+  if (SUPABASE_URL.startsWith("PASTE_") || SUPABASE_ANON_KEY.startsWith("PASTE_")) {
+    status.textContent = "The reply inbox hasn't been connected yet. Gerges needs to finish the private inbox setup first. ♡";
+    return;
+  }
+  sendBtn.disabled = true;
+  status.textContent = "Sending your message...";
+  try {
+    const response = await fetch(SUPABASE_URL.replace(/\/$/,"") + "/rest/v1/replies", {
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        "apikey":SUPABASE_ANON_KEY,
+        "Authorization":"Bearer " + SUPABASE_ANON_KEY,
+        "Prefer":"return=minimal"
+      },
+      body:JSON.stringify({wish, message})
+    });
+    if (!response.ok) throw new Error("Submission failed");
+    document.getElementById("replyForm").reset();
+    status.textContent = "Your little message has been sent. Gracias por compartirlo conmigo. ♡";
+  } catch (error) {
+    status.textContent = "Something went wrong. Please try again in a moment.";
+  } finally {
+    sendBtn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>

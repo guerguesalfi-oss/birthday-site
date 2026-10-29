@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080d20"><title>Gerges's Little Inbox</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at top,#25365c,#080d20 70%);color:#f7f5ff;font-family:Arial,sans-serif;padding:28px 16px}
+main{max-width:850px;margin:auto}section,.reply{background:#111b35;border:1px solid #ffffff24;border-radius:18px;padding:22px;margin:16px 0}
+h1,h2{font-family:Georgia,serif;font-weight:normal}h1{font-size:clamp(30px,6vw,46px)}p{color:#c0c8dc;line-height:1.7}
+label{display:block;margin:12px 0 6px;color:#f1dba5;font-size:13px}input{width:100%;padding:12px;border:1px solid #ffffff35;border-radius:10px;background:#080f20;color:#fff}
+button{border:0;border-radius:24px;padding:12px 18px;background:#f1dba5;color:#10172c;cursor:pointer;margin-top:14px}
+.hidden{display:none!important}.muted{color:#9ca9c5;font-size:13px}.entry{border-top:1px solid #ffffff20;padding-top:15px;margin-top:15px;white-space:pre-wrap;overflow-wrap:anywhere}.entry strong{color:#f1dba5}.status{color:#f1dba5;line-height:1.6}
+</style>
+</head>
+<body><main>
+<h1>Gerges's little inbox ✦</h1>
+<p>This page is for your private inbox. Sign in with the owner account you create in Supabase. Keep this page and your login private.</p>
+<section id="loginPanel">
+<h2>Owner sign in</h2>
+<form id="loginForm">
+<label for="email">Email</label><input id="email" type="email" autocomplete="username" required>
+<label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required>
+<button type="submit" id="loginBtn">Sign in</button>
+</form><div class="status" id="loginStatus" role="status"></div>
+</section>
+<section id="inboxPanel" class="hidden">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap"><h2>Replies</h2><button id="refreshBtn">Refresh</button><button id="logoutBtn">Sign out</button></div>
+<div class="status" id="inboxStatus"></div><div id="replies"></div>
+</section>
+<p class="muted">Setup note: this page needs the same Supabase project URL and public anon key as index.html. Row-level security in setup.sql restricts reading replies to the owner email you configure.</p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://licxxmpkkpdsyuzooupo.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_6wNKlDDhYMTLnis5wTpxVw_CaYxKwZZ";
+const OWNER_EMAIL = "guerguesalfi@gmail.com";
+const loginPanel=document.getElementById("loginPanel"), inboxPanel=document.getElementById("inboxPanel");
+const loginStatus=document.getElementById("loginStatus"), inboxStatus=document.getElementById("inboxStatus");
+let client=null;
+function configured(){return !SUPABASE_URL.startsWith("PASTE_")&&!SUPABASE_ANON_KEY.startsWith("PASTE_")&&OWNER_EMAIL!=="REPLACE_WITH_YOUR_EMAIL"}
+if(configured() && window.supabase){client=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);}
+else {loginStatus.textContent="Setup needed: fill in the Supabase URL, anon key, and owner email in this file first."}
+document.getElementById("loginForm").addEventListener("submit",async e=>{
+ e.preventDefault();if(!client){loginStatus.textContent="Finish the setup first.";return}
+ const email=document.getElementById("email").value.trim();
+ const password=document.getElementById("password").value;
+ if(email.toLowerCase()!==OWNER_EMAIL.toLowerCase()){loginStatus.textContent="This email is not the configured owner account.";return}
+ document.getElementById("loginBtn").disabled=true;loginStatus.textContent="Signing in...";
+ const {data,error}=await client.auth.signInWithPassword({email,password});
+ document.getElementById("loginBtn").disabled=false;
+ if(error){loginStatus.textContent="Sign-in failed. Check your email and password.";return}
+ loginStatus.textContent="";loginPanel.classList.add("hidden");inboxPanel.classList.remove("hidden");await loadReplies();
+});
+async function loadReplies(){
+ if(!client)return;inboxStatus.textContent="Loading replies...";
+ const {data,error}=await client.from("replies").select("id, wish, message, created_at").order("created_at",{ascending:false});
+ if(error){inboxStatus.textContent="Could not load replies. Check your SQL policies and owner email setting.";return}
+ const container=document.getElementById("replies");container.innerHTML="";
+ if(!data.length){inboxStatus.textContent="No replies yet.";return}
+ inboxStatus.textContent=`${data.length} repl${data.length===1?"y":"ies"} received.`;
+ data.forEach(item=>{
+  const card=document.createElement("article");card.className="reply";
+  const date=document.createElement("p");date.className="muted";date.textContent=new Date(item.created_at).toLocaleString();
+  card.appendChild(date);
+  const addEntry=(title,value)=>{const div=document.createElement("div");div.className="entry";const strong=document.createElement("strong");strong.textContent=title;const p=document.createElement("p");p.textContent=value||"(left blank)";div.append(strong,p);card.appendChild(div)};
+  addEntry("Wish 🌠",item.wish);addEntry("Something to tell me 💌",item.message);container.appendChild(card);
+ });
+}
+document.getElementById("refreshBtn").addEventListener("click",loadReplies);
+document.getElementById("logoutBtn").addEventListener("click",async()=>{await client.auth.signOut();inboxPanel.classList.add("hidden");loginPanel.classList.remove("hidden");});
+</script></body></html>
